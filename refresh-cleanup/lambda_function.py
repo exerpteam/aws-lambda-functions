@@ -13,9 +13,8 @@ def deleteRDS(instance: dict, rds_client: boto3) -> bool:
             SkipFinalSnapshot=True,
             DeleteAutomatedBackups=True)["DBInstance"]
         time.sleep(2) # Waiting 2 sec to make sure AWS corrects instance status
-        response = rds_client.describe_db_instances(
-            DBInstanceIdentifier=identifier)["DBInstances"]
-        if response["DBInstanceStatus"] == "deleting":
+        response = rds_client.describe_db_instances(DBInstanceIdentifier=identifier)["DBInstances"]
+        if response[0]["DBInstanceStatus"] == "deleting":
             print(f"Successfully started deleting {identifier}")
         return True
     except Exception as E:
