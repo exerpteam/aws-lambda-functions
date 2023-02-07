@@ -50,7 +50,7 @@ def lambda_handler(event, context):
             if checkInstance(instance):
                 print(f"Trying to delete {db_identifier}")
                 if deleteRDS(instance, rds_client):
-                    instance_list.append("db_identifier")
+                    instance_list.append(db_identifier)
     if instance_list:
         print(f"Deleting instance: {instance_list}")
         return f"Deleting instance: {instance_list}"
