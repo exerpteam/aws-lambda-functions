@@ -1,0 +1,48 @@
+name: lambda_updater
+
+#on:
+#  pull_request:
+#    types:
+#      - closed
+#    paths:
+#      - 'functions/**'
+
+on:
+  push:
+    paths:
+      - 'functions/**'
+
+jobs:
+  zip-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Print updated paths
+      run: |
+        for path in "${{ github.event.paths }}"; do
+          echo "Updated path: $path"
+        done
+
+#    - name: zip
+#      uses: montudor/action-zip@v1
+#      with:
+#        args: zip 
+#  copy-file:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#
+#    - name: Pushes test file
+#      uses: dmnemec/copy_file_to_another_repo_action@main
+#      env:
+#        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#      with:
+#        source_file: 'test2.md'
+#        destination_repo: 'dmnemec/release-test'
+#        destination_folder: 'test-dir'
+#        user_email: 'example@email.com'
+#        user_name: 'dmnemec'
+#        commit_message: 'A custom message for the commit'
