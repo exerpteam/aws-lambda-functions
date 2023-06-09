@@ -21,7 +21,7 @@ jobs:
 
     - name: Print updated paths
       run: |
-        for path in "${{ github.event.paths }}"; do
+        for path in ${{ github.event.paths }}; do
           echo "Updated path: $path"
         done
 
